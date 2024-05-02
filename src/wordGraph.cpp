@@ -1,0 +1,2 @@
+#include "../include/wordGraph.h"
+
