@@ -1,7 +1,9 @@
 #include <iostream>
+#include "include/wordGraph.h"
 
 int main() {
-    std::cout << "Implement me pls" << std::endl;
+    WordGraph graph("hello");
+    graph.initGraph();
     return 0;
 }
 
