@@ -1,14 +1,23 @@
 #!/bin/bash
 
+WORDS="words.txt"
+LENGTHS_FILE="words_with_lengths.txt"
+
+# Check if the file exists
+if [ ! -f "$WORDS" ]; then
+    echo "File $WORDS does not exist."
+    exit 1
+fi
+
 # Read each word and its length into a new file
-awk '{ print length, $0 }' words.txt > words_with_lengths.txt
+awk '{ print length, $0 }' "$WORDS" > "$LENGTHS_FILE"
 
 # Loop through unique lengths and save words with each length into separate files
-for length in $(awk '{print $1}' words_with_lengths.txt | sort -nu); do
-    grep "^$length " words_with_lengths.txt | cut -d' ' -f2- > "$((length - 1))"
+for length in $(awk '{print $1}' "$LENGTHS_FILE" | sort -nu); do
+    grep "^$length " "$LENGTHS_FILE" | cut -d' ' -f2- > "$((length - 1))"
 done
 
 # Clean up temporary file
-rm words_with_lengths.txt
+rm "$LENGTHS_FILE"
 
 echo "Words sorted into files based on their lengths."
